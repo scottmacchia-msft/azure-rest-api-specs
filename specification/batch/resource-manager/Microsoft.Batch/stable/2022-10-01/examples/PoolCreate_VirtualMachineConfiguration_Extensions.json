@@ -38,7 +38,8 @@
               }
             ]
           }
-        }
+        },
+        "targetNodeCommunicationMode": "Default"
       }
     }
   },
@@ -94,7 +95,8 @@
                 }
               ]
             }
-          }
+          },
+          "targetNodeCommunicationMode": "Default"
         }
       }
     }
