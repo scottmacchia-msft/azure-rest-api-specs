@@ -11655,7 +11655,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times each Task may be retried. The Batch service retries a Task if its exit code is nonzero.",
-          "description": "Note that this value specifically controls the number of retries. The Batch service will try each Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries a Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry Tasks. If the maximum retry count is -1, the Batch service retries Tasks without limit. The default value is 0 (no retries)."
+          "description": "Note that this value specifically controls the number of retries. The Batch service will try each Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries a Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry Tasks. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)"
         }
       },
       "title": "The execution constraints for a Job."
@@ -12089,7 +12089,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times the Task may be retried. The Batch service retries a Task if its exit code is nonzero.",
-          "description": "Note that this value specifically controls the number of retries for the Task executable due to a nonzero exit code. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task after the first attempt. If the maximum retry count is -1, the Batch service retries the Task without limit."
+          "description": "Note that this value specifically controls the number of retries for the Task executable due to a nonzero exit code. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task after the first attempt. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)"
         }
       },
       "title": "Execution constraints to apply to a Task."
@@ -12180,7 +12180,7 @@
         },
         "allowLowPriorityNode": {
           "type": "boolean",
-          "title": "Whether the Job Manager Task may run on a low-priority Compute Node.",
+          "title": "Whether the Job Manager Task may run on a Spot/Low-priority Compute Node.",
           "description": "The default value is true."
         }
       },
@@ -12375,7 +12375,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The maximum number of times the Task may be retried.",
-          "description": "The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task. If the maximum retry count is -1, the Batch service retries the Task without limit."
+          "description": "The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)"
         },
         "waitForSuccess": {
           "type": "boolean",
@@ -12540,7 +12540,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority Compute Nodes in the Pool.",
+          "title": "The desired number of Spot/Low-priority Compute Nodes in the Pool.",
           "description": "This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both."
         },
         "enableAutoScale": {
@@ -12704,7 +12704,7 @@
         "allowTaskPreemption": {
           "type": "boolean",
           "title": "Whether Tasks in this job can be preempted by other high priority jobs",
-          "description": "If the value is set to True other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "maxParallelTasks": {
           "type": "integer",
@@ -13276,7 +13276,7 @@
         "allowTaskPreemption": {
           "type": "boolean",
           "title": "Whether Tasks in this job can be preempted by other high priority jobs",
-          "description": "If the value is set to True other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "constraints": {
           "$ref": "#/definitions/JobConstraints",
@@ -14360,7 +14360,7 @@
             "type": "string"
           },
           "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
-          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
         }
       },
       "description": "The public IP Address configuration of the networking configuration of a Pool."
@@ -14568,8 +14568,8 @@
         "currentLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of low-priority Compute Nodes currently in the Pool.",
-          "description": "Low-priority Compute Nodes which have been preempted are included in this count."
+          "title": "The number of Spot/Low-priority Compute Nodes currently in the Pool.",
+          "description": "Spot/Low-priority Compute Nodes which have been preempted are included in this count."
         },
         "targetDedicatedNodes": {
           "type": "integer",
@@ -14579,7 +14579,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority Compute Nodes in the Pool."
+          "title": "The desired number of Spot/Low-priority Compute Nodes in the Pool."
         },
         "enableAutoScale": {
           "type": "boolean",
@@ -14739,7 +14739,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority Compute Nodes in the Pool.",
+          "title": "The desired number of Spot/Low-priority Compute Nodes in the Pool.",
           "description": "This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both."
         },
         "enableAutoScale": {
@@ -15737,7 +15737,7 @@
         "state": {
           "type": "string",
           "title": "The current state of the Compute Node.",
-          "description": "The low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available.",
+          "description": "The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available.",
           "enum": [
             "idle",
             "rebooting",
@@ -15810,7 +15810,7 @@
               },
               {
                 "value": "preempted",
-                "description": "The low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available."
+                "description": "The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available."
               }
             ]
           }
@@ -16308,7 +16308,7 @@
         "allowTaskPreemption": {
           "type": "boolean",
           "title": "Whether Tasks in this job can be preempted by other high priority jobs",
-          "description": "If the value is set to True other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "onAllTasksComplete": {
           "title": "The action the Batch service should take when all Tasks in the Job are in the completed state.",
@@ -16355,7 +16355,7 @@
         "allowTaskPreemption": {
           "type": "boolean",
           "title": "Whether Tasks in this job can be preempted by other high priority jobs",
-          "description": "If the value is set to True other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "constraints": {
           "$ref": "#/definitions/JobConstraints",
@@ -16428,7 +16428,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority Compute Nodes in the Pool."
+          "title": "The desired number of Spot/Low-priority Compute Nodes in the Pool."
         },
         "resizeTimeout": {
           "type": "string",
@@ -17300,7 +17300,7 @@
         },
         "lowPriority": {
           "$ref": "#/definitions/NodeCounts",
-          "title": "The number of low priority Compute Nodes in each state."
+          "title": "The number of Spot/Low-priority Compute Nodes in each state."
         }
       },
       "required": [
