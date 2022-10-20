@@ -40,7 +40,8 @@
           "name": "myproperty",
           "value": "myvalue"
         }
-      ]
+      ],
+      "targetNodeCommunicationMode": "simplified"
     }
   },
   "responses": {

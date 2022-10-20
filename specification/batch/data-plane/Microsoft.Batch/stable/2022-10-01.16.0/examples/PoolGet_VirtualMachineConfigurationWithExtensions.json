@@ -59,7 +59,9 @@
               "settings": "{\"settingsKey\":\"settingsValue\"}"
             }
           ]
-        }
+        },
+        "targetNodeCommunicationMode": "classic",
+        "currentNodeCommunicationMode": "classic"
       }
     }
   }
