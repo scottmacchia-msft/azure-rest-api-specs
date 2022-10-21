@@ -11796,7 +11796,7 @@
       "required": [
         "name"
       ],
-      "title": "A HTTP header name-value pair"
+      "title": "An HTTP header name-value pair"
     },
     "ExitConditions": {
       "type": "object",
@@ -13174,7 +13174,7 @@
         "allowTaskPreemption": {
           "type": "boolean",
           "title": "Whether Tasks in this job can be preempted by other high priority jobs",
-          "description": "If the value is set to True other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
+          "description": "If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
         },
         "maxParallelTasks": {
           "type": "integer",
@@ -15922,7 +15922,7 @@
         },
         "isDedicated": {
           "type": "boolean",
-          "title": "Whether this Compute Node is a dedicated Compute Node. If false, the Compute Node is a low-priority Compute Node."
+          "title": "Whether this Compute Node is a dedicated Compute Node. If false, the Compute Node is a Spot/Low-priority Compute Node."
         },
         "endpointConfiguration": {
           "$ref": "#/definitions/ComputeNodeEndpointConfiguration",
