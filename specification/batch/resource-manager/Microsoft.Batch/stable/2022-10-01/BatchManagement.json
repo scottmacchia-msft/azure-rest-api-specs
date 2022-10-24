@@ -1982,9 +1982,6 @@
               }
             }
           },
-          "204": {
-            "description": "The operation was successful."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
