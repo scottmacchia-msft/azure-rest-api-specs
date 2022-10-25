@@ -3006,7 +3006,7 @@
         },
         "allowedAuthenticationModes": {
           "readOnly": true,
-          "x-nullable": false,
+          "x-nullable": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/AuthenticationMode"
@@ -3669,7 +3669,11 @@
         "data": {
           "type": "string",
           "title": "The base64-encoded contents of the certificate.",
-          "description": "The maximum size is 10KB."
+          "description": "The maximum size is 10KB.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "password": {
           "type": "string",
@@ -3956,7 +3960,7 @@
           "type": "string",
           "title": "Description of the private Connection state"
         },
-        "actionRequired": {
+        "actionsRequired": {
           "type": "string",
           "title": "Action required on the private connection state",
           "readOnly": true
@@ -4370,7 +4374,11 @@
         "nodeDeallocationOption": {
           "title": "Determines what to do with a node and its running task(s) if the pool size is decreasing.",
           "description": "If omitted, the default value is Requeue.",
-          "$ref": "#/definitions/ComputeNodeDeallocationOption"
+          "$ref": "#/definitions/ComputeNodeDeallocationOption",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         }
       },
       "title": "Fixed scale settings for the pool."
@@ -5457,7 +5465,7 @@
             "description": "Setting up RBAC for Azure Batch VNets"
           }
         },
-        "dynamicVNetAssignmentScope": {
+        "dynamicVnetAssignmentScope": {
           "type": "string",
           "title": "The scope of dynamic vnet assignment.",
           "enum": [
@@ -6106,7 +6114,7 @@
     "CIFSMountConfiguration": {
       "type": "object",
       "properties": {
-        "username": {
+        "userName": {
           "type": "string",
           "title": "The user to use for authentication against the CIFS file system."
         },
@@ -6130,7 +6138,6 @@
         }
       },
       "required": [
-        "username",
         "source",
         "password",
         "relativeMountPath"
@@ -6167,7 +6174,6 @@
       "required": [
         "accountName",
         "azureFileUrl",
-        "accountKey",
         "relativeMountPath"
       ],
       "title": "Information used to connect to an Azure Fileshare."
